@@ -7,18 +7,17 @@ import {
     serviceWithDataLayer
 } from "infrastructure-components";
 
-import { MY_ENTRY_ID, IMyEntry } from './my-entry';
+import { USER_ENTRY_ID, IUserEntry } from './user-entry';
 
-const POST_SERVICE_ID = "postservice";
+const ADDUSER_SERVICE_ID = "adduser";
 
-export async function callMyPostService (myEntryData: IMyEntry) {
+export async function callAddUserService (userData: IUserEntry) {
 
     await callService(
-        POST_SERVICE_ID,
-        myEntryData,
+        ADDUSER_SERVICE_ID,
+        userData,
         (data: any) => {
             console.log("received data: ", data);
-
         },
         (error) => {
             console.log("error: " , error)
@@ -27,23 +26,21 @@ export async function callMyPostService (myEntryData: IMyEntry) {
 
 };
 
-export default function MyPostService () {
+export default function AddUserService () {
 
     return <Service
-        id={ POST_SERVICE_ID }
-        path="/mypostservice"
+        id={ ADDUSER_SERVICE_ID }
+        path="/adduser"
         method="POST">
 
         <Middleware
             callback={serviceWithDataLayer(async function (dataLayer, req, res, next) {
 
-                const parsedBody = JSON.parse(req.body);
-
-                console.log("This is the data we got: ", parsedBody);
+                const parsedBody: IUserEntry = JSON.parse(req.body);
 
                 await mutate(
                     dataLayer.client,
-                    dataLayer.setEntryMutation(MY_ENTRY_ID, parsedBody)
+                    dataLayer.setEntryMutation(USER_ENTRY_ID, parsedBody)
                 );
 
                 res.status(200).set({

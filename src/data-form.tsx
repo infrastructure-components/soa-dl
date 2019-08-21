@@ -2,53 +2,62 @@ import React, { useState } from 'react';
 
 import { select, withDataLayer, callService } from 'infrastructure-components';
 
-import MyGetService, { callMyGetService } from './my-get-service';
-import MyPostService, { callMyPostService } from './my-post-service';
-import {IMyEntry} from "./my-entry";
+import GetUserService, { callGetUserService } from './get-user-service';
+import AddUserService, { callAddUserService } from './add-user-service';
+import {IUserEntry} from "./user-entry";
 
 
 export default function DataForm (props)  {
 
-    const [pkey, setPrimary] = useState("");
-    const [skey, setSecondary] = useState("");
-    const [mydata, setMyData] = useState("");
+    const [username, setUsername] = useState("");
+    const [userid, setUserId] = useState("");
+    const [age, setAge] = useState("");
+    const [address, setAddress] = useState("");
 
     return <div>
         <div>
-            Primary Key:
-            <input value={pkey} onChange={event => setPrimary(event.target.value)}/>
+            Username:
+            <input value={username} onChange={event => setUsername(event.target.value)}/>
         </div>
 
         <div>
-            Secondary Key:
-            <input value={skey} onChange={event => setSecondary(event.target.value)}/>
+            Range Key:
+            <input value={userid} onChange={event => setUserId(event.target.value)}/>
         </div>
 
         <div>
-            My Data:
-            <input value={mydata} onChange={event => setMyData(event.target.value)}/>
+            Age:
+            <input value={age} onChange={event => setAge(event.target.value)}/>
+        </div>
+
+        <div>
+            Address:
+            <input value={address} onChange={event => setAddress(event.target.value)}/>
         </div>
 
 
-        <button onClick={() => callMyPostService({
-            pkey: pkey,
-            skey: skey,
-            mydata: mydata
+        <button onClick={() => callAddUserService({
+            username: username,
+            userid: userid,
+            age: age,
+            address: address
         })}>Save</button>
 
         <button onClick={async function () {
-            callMyGetService(pkey, skey, (data: IMyEntry)=> {
-                setPrimary(data.pkey);
-                setSecondary(data.skey);
-                setMyData(data.mydata);
+            callGetUserService(username, userid, (data: IUserEntry)=> {
+                setUsername(data.username);
+                setUserId(data.userid);
+                setAge(data.age);
+                setAddress(data.address);
             })
         }
         }>Load</button>
 
         <button onClick={() =>{
-            setPrimary("");
-            setSecondary("");
-            setMyData("");
+            setUsername("");
+            setUserId("");
+            setAge("");
+            setAddress("");
         }}>Clear</button>
 
     </div>

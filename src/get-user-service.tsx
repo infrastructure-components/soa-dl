@@ -8,24 +8,24 @@ import {
     serviceWithDataLayer
 } from "infrastructure-components";
 
-import {IMyEntry, MY_ENTRY_ID} from './my-entry';
+import {IUserEntry, USER_ENTRY_ID} from './user-entry';
 
-export const GET_SERVICE_ID = "getservice";
+export const GETUSER_SERVICE_ID = "getservice";
 
-export async function callMyGetService (pkey: string, skey: string, onData: (myEntryData: IMyEntry) => void) {
+export async function callGetUserService (username: string, userid: string, onData: (userData: IUserEntry) => void) {
 
     await callService(
-        GET_SERVICE_ID,
+        GETUSER_SERVICE_ID,
         {
-            pkey: pkey,
-            skey: skey
+            username: username,
+            userid: userid
         },
         async function (response: any) {
             console.log("received data: ", response);
 
             await response.json().then(function(data) {
-                console.log(data[`get_${MY_ENTRY_ID}`]);
-                onData(data[`get_${MY_ENTRY_ID}`]);
+                console.log(data[`get_${USER_ENTRY_ID}`]);
+                onData(data[`get_${USER_ENTRY_ID}`]);
             });
         },
         (error) => {
@@ -35,10 +35,10 @@ export async function callMyGetService (pkey: string, skey: string, onData: (myE
 
 }
 
-export default function MyGetService () {
+export default function GetUserService () {
     return <Service
-        id={ GET_SERVICE_ID }
-        path="/mygetservice"
+        id={ GETUSER_SERVICE_ID }
+        path="/getuser"
         method="GET">
 
         <Middleware
@@ -48,9 +48,9 @@ export default function MyGetService () {
 
                 const data = await select(
                     dataLayer.client,
-                    dataLayer.getEntryQuery(MY_ENTRY_ID, {
-                        pkey: req.query.pkey,
-                        skey: req.query.skey
+                    dataLayer.getEntryQuery(USER_ENTRY_ID, {
+                        username: req.query.username,
+                        userid: req.query.userid
                     })
                 );
 

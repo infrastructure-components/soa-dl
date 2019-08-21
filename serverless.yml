@@ -59,8 +59,8 @@ functions:
     events:
       - http: 'ANY {proxy+}'
       - cors: true
-      - http: 'GET /mygetservice'
-      - http: 'POST /mypostservice'
+      - http: 'GET /getuser'
+      - http: 'POST /adduser'
     role: ServiceOrientedAppLambdaRole
 
 resources:

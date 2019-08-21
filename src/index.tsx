@@ -8,23 +8,11 @@ import {
     ServiceOrientedApp
 } from "infrastructure-components";
 
-import MyEntry, { MY_ENTRY_ID } from './my-entry';
+import UserEntry, { USER_ENTRY_ID } from './user-entry';
 import DataForm from './data-form';
-import MyGetService from './my-get-service';
-import MyPostService from './my-post-service';
+import GetUserService from './get-user-service';
+import AddUserService from './add-user-service';
 
-/**
- * Required permissions:
- *
- "dynamodb:CreateTable",
- "dynamodb:DeleteTable",
- "dynamodb:DescribeTable",
- "dynamodb:DeleteItem",
- "dynamodb:GetItem",
- "dynamodb:PutItem",
- "dynamodb:Scan",
- "dynamodb:Query",
- */
 
 export default (
     <ServiceOrientedApp
@@ -42,9 +30,9 @@ export default (
 
         <DataLayer id="datalayer">
 
-            <MyEntry />
-            <MyGetService />
-            <MyPostService />
+            <UserEntry />
+            <GetUserService />
+            <AddUserService />
 
         </DataLayer>
 
