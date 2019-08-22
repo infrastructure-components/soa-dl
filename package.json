@@ -10,16 +10,17 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@apollo/react-hooks": "^3.0.1",
     "@babel/polyfill": "^7.4.4",
     "express": "^4.17.1",
-    "infrastructure-components": "^0.2.9",
+    "infrastructure-components": "^0.2.10-alpha.32",
     "isomorphic-fetch": "^2.2.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "serverless-http": "^2.1.0"
   },
   "devDependencies": {
-    "infrastructure-scripts": "^0.2.9",
+    "infrastructure-scripts": "^0.2.10-alpha.32",
     "serverless-dynamodb-local": "^0.2.30",
     "serverless-offline": "^4.9.4",
     "serverless-pseudo-parameters": "^2.4.0",

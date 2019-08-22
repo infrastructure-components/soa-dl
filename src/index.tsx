@@ -13,7 +13,6 @@ import DataForm from './data-form';
 import GetUserService from './get-user-service';
 import AddUserService from './add-user-service';
 
-
 export default (
     <ServiceOrientedApp
         stackName = "soa-dl"
